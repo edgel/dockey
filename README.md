@@ -1,2 +1,2 @@
 # dockey
-Docker Keyman for container manage
+Docker Keyman for container management
