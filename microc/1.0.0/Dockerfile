@@ -18,11 +18,10 @@ RUN set -eux; \
   chown -R nobody:nogroup $CATALINA_BASE/temp; \
   mkdir -p $CATALINA_BASE/work; \
   chown -R nobody:nogroup $CATALINA_BASE/work; \
-  \
   chown -R nobody:nogroup $CATALINA_BASE/.well-known; \
   \
-  export source="securerandom\.source\=file\:\/dev\/random" \
-  export target="securerandom\.source\=file\:\/dev\/\.\/urandom" \
+  export source="securerandom\.source\=file\:\/dev\/random"; \
+  export target="securerandom\.source\=file\:\/dev\/\.\/urandom"; \
   sed -i "s/$source/$target/g" $JAVA_HOME/lib/security/java.security;
 
 USER nobody
