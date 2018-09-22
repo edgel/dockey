@@ -2,7 +2,8 @@ FROM yeahzhu/dockey:tomee
 
 ENV CATALINA_BASE=/usr/local/microc
 
-RUN set -eux; mkdir -p $CATALINA_BASE; \
+RUN set -eux; \
+  mkdir -p $CATALINA_BASE; \
   \
   mkdir -p $CATALINA_BASE/conf; \
   mkdir -p $CATALINA_BASE/conf/Catalina; \
@@ -19,6 +20,9 @@ RUN set -eux; mkdir -p $CATALINA_BASE; \
   chown -R nobody:nogroup $CATALINA_BASE/work; \
   \
   chown -R nobody:nogroup $CATALINA_BASE/.well-known; \
-  sed -i "s/securerandom\.source\=file\:\/dev\/random/securerandom\.source\=file\:\/dev\/\.\/urandom/g" $JAVA_HOME/lib/security/java.security;
+  \
+  export source="securerandom\.source\=file\:\/dev\/random" \
+  export target="securerandom\.source\=file\:\/dev\/\.\/urandom" \
+  sed -i "s/$source/$target/g" $JAVA_HOME/lib/security/java.security;
 
 USER nobody
